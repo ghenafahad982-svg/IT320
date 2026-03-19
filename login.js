@@ -68,16 +68,11 @@ document.getElementById('admin-login-form').addEventListener('submit', function(
       
        // AC: Successful login
         else {
-            loginBtn.classList.remove('disabled'); // نشيل الرمادي
+            loginBtn.classList.remove('disabled'); 
             loginBtn.innerText = "Success!";
-            loginBtn.style.backgroundColor = "#28A745"; // الحين الأخضر بيأخذ راحته
+            loginBtn.style.backgroundColor = "#28A745";
             loginBtn.style.color = "#ffffff";
-            loginBtn.style.width = "100%";
-            
-            
-           
-           
-                window.location.href = "admin-dashboard.html";
+            window.location.href = "admin-dashboard.html";
           
         }
     }, 1500);
