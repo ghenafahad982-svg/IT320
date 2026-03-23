@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Reservations</title>
+</head>
+<body>
+
+  <h1>My Reservations</h1>
+
+  <div class="trip-card">
+    <h3>Reservation 1</h3>
+    <p>Bus: Bus-12</p>
+    <p>Time: 07:10 AM</p>
+    <p>Status: Active</p>
+
+    <p>How do I get to my college?</p>
+    <p>If humanities colleges → 509</p>
+    <p>If science colleges → 510</p>
+
+    <button class="btn btn-secondary">Edit</button>
+    <button class="btn btn-primary">Cancel</button>
+  </div>
+
+  <hr>
+
+  <!-- Cancel Confirmation Modal -->
+  <div class="modal">
+    <div class="modal-content">
+      <h3>Cancel Confirmation</h3>
+      <p>Are you sure?</p>
+      <button class="btn btn-primary">Confirm</button>
+      <button class="btn btn-secondary">Close</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="data-card">
+    <h3>Edit Reservation</h3>
+
+    <div class="form-group">
+      <label for="edit-time">Departure Time</label>
+      <input type="time" id="edit-time">
+    </div>
+
+    <p class="error-message">Please select a valid time.</p>
+
+    <button class="btn btn-primary">Save</button>
+  </div>
+
+  <br><br>
+  <a href="booking.html">Back to Booking</a>
+
+</body>
+</html>
