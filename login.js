@@ -69,20 +69,65 @@ document.getElementById('admin-login-form').addEventListener('submit', function(
        // AC: Successful login
         else {
             loginBtn.classList.remove('disabled'); 
+            loginBtn.style.pointerEvents = "none";
             loginBtn.innerText = "Success!";
             loginBtn.style.backgroundColor = "#28A745"; 
             loginBtn.style.color = "#ffffff";
-            loginBtn.style.width = "100%";
-            window.location.href = "admin-dashboard.html";
+           
+            setTimeout(() => {
+           window.location.href = "admin-dashboard.html";
+        }, 1500);
           
         }
-    }, 1500);
+    }, 5000);
 
+      
     // Helper for Admin Errors
     function showAdminError(message) {
         errorMsg.innerText = message;
         errorMsg.style.display = 'block';
         loginBtn.innerText = "Admin Log In";
         loginBtn.classList.remove('disabled');
+    }
+});
+
+// --- 4. Forgot Password Logic (Mock Phase) ---
+const forgotPwdLink = document.getElementById('forgot-password-link');
+const forgotPwdModal = document.getElementById('forgot-password-modal');
+const closeModalBtn = document.getElementById('close-modal-btn');
+const forgotPwdForm = document.getElementById('forgot-password-form');
+const resetMessage = document.getElementById('reset-message');
+
+// Open modal when the "Forgot Password?" link is clicked
+forgotPwdLink.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default link behavior
+    forgotPwdModal.style.display = 'flex'; // Show the modal
+    resetMessage.style.display = 'none'; // Hide any previous messages
+    document.getElementById('reset-email').value = ''; // Clear the email input field
+});
+
+// Close modal when the "Cancel" button is clicked
+closeModalBtn.addEventListener('click', function() {
+    forgotPwdModal.style.display = 'none';
+});
+
+
+// Mock sending the password reset request
+forgotPwdForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const resetEmail = document.getElementById('reset-email').value.trim();
+    
+    if (resetEmail) {
+        // Generic message to mock the "Email Enumeration Protection" feature
+        resetMessage.style.color = "#28A745"; // Success green color
+        resetMessage.innerText = "If this email is registered, you will receive a reset link shortly.";
+        resetMessage.style.display = "block";
+        
+        
+        setTimeout(() => {
+            forgotPwdModal.style.display = 'none';
+            resetMessage.style.display = 'none';
+        }, 5000);
     }
 });

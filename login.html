@@ -38,6 +38,7 @@
             display: block;
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
     </style>
 </head>
 <body> 
@@ -58,13 +59,17 @@
             <form id="student-login-form">
                 <div class="form-group">
                     <label for="student-email">Email Address</label>
-                    <input type="email" id="student-email" placeholder="e.g., name@student.ksu.edu.sa" required>
+                    <input type="email" id="student-email" placeholder="e.g., name@gmail.com" required>
                 </div>
                 <div class="form-group">
                     <label for="student-password">Password</label>
                     <input type="password" id="student-password" placeholder="Enter your password" required>
                 </div>
                 
+                <div style="text-align: right; margin-bottom: 1rem; margin-top: -10px;">
+                    <a href="#" id="forgot-password-link" style="color: var(--primary-blue); font-size: 0.875rem; text-decoration: none;">Forgot Password?</a>
+                </div>
+
                 <p id="student-error" class="error-message"></p>
                 <button type="submit" class="btn-primary btn">Log In</button>
             </form>
@@ -78,7 +83,7 @@
             <form id="admin-login-form">
                 <div class="form-group">
                     <label for="admin-email">Admin Email</label>
-                    <input type="email" id="admin-email" placeholder="e.g., admin@ksu.edu.sa" required>
+                    <input type="email" id="admin-email" placeholder="e.g., admin@gmail.com" required>
                 </div>
                 <div class="form-group">
                     <label for="admin-password">Password</label>
@@ -90,6 +95,23 @@
             </form>
         </div>
 
+    </div>
+
+    <div id="forgot-password-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">Reset Password</h3>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 1.5rem;">Enter your email address and we will send you a link to reset your password.</p>
+            
+            <form id="forgot-password-form">
+                <div class="form-group" style="text-align: left;">
+                    <input type="email" id="reset-email" placeholder="e.g., name@gmail.com" required style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                <button type="submit" class="btn-primary btn" style="width: 100%; margin-top: 10px;">Send Reset Link</button>
+                <button type="button"  id="close-modal-btn" style="margin-top: 1rem; background: none; border: none; color: #888; cursor: pointer; text-decoration: underline; font-size: 0.9rem;">Cancel</button>
+            </form>
+            
+            <p id="reset-message" style="display: none; margin-top: 1rem; font-size: 0.9rem;"></p>
+        </div>
     </div>
 
     <script src="login.js"></script>

@@ -66,15 +66,18 @@ document.getElementById('register-form').addEventListener('submit', async functi
         console.log("Phone:", phone);
         console.log("Hashed Password (Stored):", hashedPassword); 
         
+        registerBtn.classList.remove('disabled');
+        registerBtn.style.pointerEvents = "none";  
         registerBtn.innerText = "Account Created!";
-        registerBtn.style.backgroundColor = "var(--success-green)";
+        registerBtn.style.backgroundColor = "#28A745"; 
+        registerBtn.style.color = "#ffffff";
         
         // Redirect to login page after success
         setTimeout(() => {
             window.location.href = "login.html";
         }, 1500);
         
-    }, 1000);
+    }, 2000);
 
 });
 
