@@ -1,7 +1,4 @@
-/* ==========================================================
-   Gharsah's Logic (Student UI: Home, Search, Profile)
-   Dynamic Data Approach for Easy Firebase Integration Later
-   ========================================================== */
+
 
 // 1. Mock Data (To be replaced by Firebase data in Phase 4)
 const mockBuses = [
