@@ -2,7 +2,6 @@
    KSU Subul - Main Stylesheet 
    Architected for Reusability and Clean UI
    ========================================================== */
-
 /* ----------------------------------------------------------
    1. Global Variables (Design System)
    Use these variables instead of hardcoding colors!
@@ -18,6 +17,7 @@
    
     /*Navigation Bar*/
     --NavigationBar-background: #E6F0FA;
+    
     /* Text Colors */
     --text-dark: #333333;       /* Main body text */
     --text-muted: #666666;      /* Secondary text or hints */
@@ -210,7 +210,6 @@ input[type="tel"]:focus {
 
 /* ==========================================================Razan pages=======================================================
 5. Authentication Layout (Specific to Login/Register)
-   Do NOT use these for internal dashboard pages.
    ========================================================== */
 .app-container {
     width: 100%;
@@ -252,13 +251,13 @@ input[type="tel"]:focus {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start; 
-    padding: 1.25rem; /* 20px */
+   
     text-align: left; 
 }
 
 .text-area h1 {
     color: #001A4D;
-    font-size: 2.5rem; /* 40px */
+    font-size: 2rem; /* 40px */
     margin-bottom: 0.625rem; /* 10px */
 }
 
@@ -272,11 +271,13 @@ input[type="tel"]:focus {
 /* Button Group Specifics */
 .button-group {
     display: flex;
+    
     gap: 0.9375rem; /* 15px */
 }
 
 .button-group .btn-primary, 
 .button-group .btn-secondary {
+    margin: auto;
     width: auto; 
     padding: 0.75em 1.5em; /* 12px 25px - Used em relative to button font size */
 }
@@ -286,15 +287,14 @@ input[type="tel"]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2.1875rem; /* 35px */
+    padding: 0.1rem; /* 35px */
 }
 
 .splash-logo {
-    width: 43.75rem; /* 700px */
+    width: 50rem; /* 700px */
     max-width: 100%; 
-    mix-blend-mode: multiply; 
+  
 }
-
 @media (max-width: 430px) { 
     .splash-container {
         flex-direction: column-reverse;
@@ -341,5 +341,4 @@ input[type="tel"]:focus {
     }
 }
 /* ==========================================================end Razan pages=======================================================*/
-
 
