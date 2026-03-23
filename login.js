@@ -70,8 +70,9 @@ document.getElementById('admin-login-form').addEventListener('submit', function(
         else {
             loginBtn.classList.remove('disabled'); 
             loginBtn.innerText = "Success!";
-            loginBtn.style.backgroundColor = "#28A745";
+            loginBtn.style.backgroundColor = "#28A745"; 
             loginBtn.style.color = "#ffffff";
+            loginBtn.style.width = "100%";
             window.location.href = "admin-dashboard.html";
           
         }
