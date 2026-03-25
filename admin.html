@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Subul | لوحة تحكم الإدارة</title>
+    <link rel="stylesheet" href="sheet.css">
+</head>
+<body>
+
+    <header class="sb-navbar">
+        <div class="sb-nav-left">
+            <span class="sb-logout-btn">⇥</span>
+            <div class="sb-user-badge">مدير النظام</div>
+        </div>
+
+        <div class="sb-nav-right">
+            <span class="sb-logo-text">Subul</span>
+            <div class="sb-logo-icon-bg">
+                <img src="logo.png" alt="Logo" class="sb-logo-img">
+            </div>
+        </div>
+    </header>
+
+    <main class="sb-main">
+        <h2 class="sb-title">لوحة تحكم الإدارة</h2>
+
+        <div class="sb-cards-grid">
+            <div class="sb-card sb-card-white">
+                <span class="sb-card-icon">📅</span>
+                <h3>إدارة الجداول</h3>
+                <p>تخصيص المواعيد</p>
+            </div>
+
+            <div class="sb-card sb-card-dark" id="bus-card-btn">
+                <span class="sb-card-icon">🚌</span>
+                <h3>إدارة الحافلات</h3>
+                <p>3 حافلات مسجلة</p>
+            </div>
+        </div>
+
+        <section class="sb-list-section" id="fleet-list">
+            <div class="sb-list-header">
+                <h3>قائمة الحافلات (الأسطول)</h3>
+                <button class="sb-add-btn" id="add-action-btn">+ إضافة</button>
+            </div>
+
+            <div class="sb-bus-item">
+                <div class="sb-bus-info">
+                    <h4>B-101</h4>
+                    <p>السعة: 30 راكب</p>
+                </div>
+                <div class="sb-status sb-status-active">نشط</div>
+            </div>
+
+            <div class="sb-bus-item">
+                <div class="sb-bus-info">
+                    <h4>B-205</h4>
+                    <p>السعة: 25 راكب</p>
+                </div>
+                <div class="sb-status sb-status-active">نشط</div>
+            </div>
+
+            <div class="sb-bus-item">
+                <div class="sb-bus-info">
+                    <h4>B-303</h4>
+                    <p>السعة: 30 راكب</p>
+                </div>
+                <div class="sb-status sb-status-maint">في الصيانة</div>
+            </div>
+        </section>
+    </main>
+
+    <div class="sb-toast" id="toast-msg">
+        <span class="sb-check-icon">✓</span>
+        تم إضافة حافلة جديدة
+    </div>
+
+    <script src="sheet.js"></script>
+</body>
+</html>

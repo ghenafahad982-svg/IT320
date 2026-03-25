@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subul | حجوزاتي</title>
+  <link rel="stylesheet" href="sheet.css">
+</head>
+<body>
+
+  <header class="sb-navbar">
+    <div class="sb-nav-left">
+      <span class="sb-logout-btn">⇥</span>
+      <div class="sb-user-badge">رزان (طالبة)</div>
+    </div>
+
+    <div class="sb-nav-right">
+      <span class="sb-logo-text">Subul</span>
+      <div class="sb-logo-icon-bg">
+        <img src="logo.png" alt="Logo" class="sb-logo-img">
+      </div>
+    </div>
+  </header>
+
+  <main class="rs-page">
+    <h1 class="rs-title">حجوزاتي القادمة</h1>
+
+    <section class="rs-list-wrap" id="rs-list">
+
+      <div class="rs-card">
+        <div class="rs-top-row">
+          <span class="rs-badge">مؤكد</span>
+        </div>
+
+        <div class="rs-main-row">
+          <div class="rs-info">
+            <h3>المدينة الجامعية ➜ عليشة</h3>
+            <p>الساعة 08:00 ص - حافلة B-101</p>
+          </div>
+        </div>
+
+        <div class="rs-bottom-row">
+          <div class="rs-actions">
+            <button type="button" class="rs-btn-icon rs-btn-delete" onclick="openCancelModal(this)">🗑</button>
+            <button type="button" class="rs-btn-icon rs-btn-edit" onclick="openEditModal(this)">✎</button>
+          </div>
+
+          <div class="rs-edit-time">
+            <span class="rs-timer" data-seconds="104">متبقي للتعديل: 1:44</span>
+            <span class="rs-mini-clock">◔</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rs-card">
+        <div class="rs-top-row">
+          <span class="rs-badge">مؤكد</span>
+        </div>
+
+        <div class="rs-main-row">
+          <div class="rs-info">
+            <h3>المدينة الجامعية ➜ عليشة</h3>
+            <p>الساعة 10:00 ص - حافلة B-205</p>
+          </div>
+        </div>
+
+        <div class="rs-bottom-row">
+          <div class="rs-actions">
+            <button type="button" class="rs-btn-icon rs-btn-delete" onclick="openCancelModal(this)">🗑</button>
+            <button type="button" class="rs-btn-icon rs-btn-edit" onclick="openEditModal(this)">✎</button>
+          </div>
+
+          <div class="rs-edit-time">
+            <span class="rs-timer" data-seconds="55">متبقي للتعديل: 0:55</span>
+            <span class="rs-mini-clock">◔</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="bk-footer">
+    <a href="home.html" class="bk-nav-item">
+      <span class="bk-nav-icon">⌂</span>
+      <span>الرئيسية</span>
+    </a>
+
+    <a href="reservations.html" class="bk-nav-item bk-nav-active">
+      <span class="bk-nav-icon bk-nav-active-icon">🗓</span>
+      <span>حجوزاتي</span>
+    </a>
+
+    <a href="schedule.html" class="bk-nav-item">
+      <span class="bk-nav-icon">◷</span>
+      <span>الجدول</span>
+    </a>
+
+    <a href="profile.html" class="bk-nav-item">
+      <span class="bk-nav-icon">👤</span>
+      <span>حسابي</span>
+    </a>
+  </footer>
+
+  <div class="rs-overlay" id="rs-edit-overlay">
+    <div class="rs-modal">
+      <div class="rs-modal-head">
+        <button type="button" class="rs-close-btn" onclick="closeEditModal()">×</button>
+        <h2>تعديل وقت الحجز</h2>
+      </div>
+
+      <div class="rs-modal-body">
+        <label class="rs-label" for="rs-time-select">الوقت البديل المتاح:</label>
+
+        <select id="rs-time-select" class="rs-select">
+          <option>الرحلة القادمة: 02:00 م</option>
+          <option>الرحلة المسائية: 04:00 م</option>
+        </select>
+
+        <button type="button" class="rs-save-edit-btn" onclick="saveReservationEdit()">حفظ التعديل</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rs-overlay" id="rs-cancel-overlay">
+    <div class="rs-modal rs-modal-small">
+      <div class="rs-modal-head">
+        <button type="button" class="rs-close-btn" onclick="closeCancelModal()">×</button>
+        <h2>إلغاء الحجز</h2>
+      </div>
+
+      <div class="rs-modal-body">
+        <p class="rs-cancel-text">
+          هل أنت متأكدة من رغبتك في إلغاء الحجز؟ لا يمكن التراجع عن هذا الإجراء.
+        </p>
+
+        <div class="rs-cancel-actions">
+          <button type="button" class="rs-confirm-cancel-btn" id="rs-confirm-cancel-btn">نعم، ألغِ الحجز</button>
+          <button type="button" class="rs-back-btn" onclick="closeCancelModal()">تراجع</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rs-toast" id="rs-toast">
+    <span class="rs-toast-icon">✓</span>
+    <span id="rs-toast-text">تم تحديث الموعد بنجاح</span>
+  </div>
+
+  <script src="sheet.js"></script>
+</body>
+</html>
