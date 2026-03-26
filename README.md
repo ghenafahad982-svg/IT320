@@ -1,9 +1,9 @@
 # IT320
- ksu سُبل  Transportation System
+### ksu سُبل  Transportation System
  is an interactive web-based platform designed to facilitate and organize the bus reservation process for female students at King Saud University (KSU). The system allows students to search for available trips, book seats, and schedule recurring rides. Additionally, it provides the transportation administration with a comprehensive dashboard to manage the bus fleet and schedules with high flexibility.
 
  Key Features
-### Student Module:
+ Student Module:
 * Search & Book: An intuitive interface to search for available trips and book seats instantly.
 * Reservation Management: View upcoming/past trips, edit reservations (restricted by a 2-minute timer logic), and cancel bookings.
 * Recurring Scheduling: Ability to set up daily, weekly, or monthly recurring bus reservations.
