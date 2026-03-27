@@ -166,6 +166,7 @@ document.getElementById("busForm").addEventListener("submit", function(e){
             capacity,
             status
         });
+		showRSToast("Bus added successfully");
     }
 
     save();
@@ -175,16 +176,17 @@ document.getElementById("busForm").addEventListener("submit", function(e){
 
 // ================= EDIT =================
 function editBus(id){
-    const bus = buses.find(b => b.id === id);
+     const bus = buses.find(b => b.id === id);
 
     document.getElementById("busNumber").value = bus.number;
-    document.getElementById("busNumber").disabled = true; // 🔒 ما يتغير
+    document.getElementById("busNumber").disabled = true; 
 
     document.getElementById("driverName").value = bus.driver;
     document.getElementById("capacity").value = bus.capacity;
     document.getElementById("status").value = bus.status;
 
     editId = id;
+	
 }
 
 // ================= STATUS =================
@@ -197,6 +199,7 @@ function toggleStatus(id){
 
     save();
     renderBuses();
+	showRSToast("Bus status updated");
 }
 
 // ================= INIT =================
@@ -209,8 +212,21 @@ document.querySelectorAll('.logout-btn').forEach(btn => {
         window.location.href = "login.html";
     });
 });
+function showRSToast(message) {
+    const toast = document.getElementById("rs-toast");
+    const text = document.getElementById("rs-toast-text");
 
+    text.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
 </script>
-
+<div class="rs-toast" id="rs-toast">
+  <span class="rs-toast-icon">✓</span>
+  <span id="rs-toast-text">Done</span>
+</div>
 </body>
 </html>
