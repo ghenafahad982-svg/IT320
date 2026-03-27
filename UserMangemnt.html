@@ -1,5 +1,4 @@
-
-   <!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <title>User Management</title>
@@ -183,6 +182,7 @@ userForm.addEventListener("submit", e => {
     save();
     render();
     userForm.reset();
+	showRSToast("User added successfully");
 });
 
 
@@ -194,6 +194,7 @@ u.id===id ? {...u, status: u.status==="Active"?"Inactive":"Active"} : u
 
 save();
 render();
+showRSToast("User status updated");
 }
 
 // ================= LOGOUT =================
@@ -207,7 +208,22 @@ document.querySelectorAll('.logout-btn').forEach(btn => {
 // INIT
 render();
 
-</script>
+function showRSToast(message) {
+    const toast = document.getElementById("rs-toast");
+    const text = document.getElementById("rs-toast-text");
 
+    text.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+</script>
+<div class="rs-toast" id="rs-toast">
+  <span class="rs-toast-icon">✓</span>
+  <span id="rs-toast-text">Done</span>
+</div>
 </body>
 </html>
