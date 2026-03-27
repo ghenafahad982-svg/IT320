@@ -8,27 +8,23 @@
 
 <body>
 
-<!-- NAVBAR -->
 <header class="navbar">
     <div class="nav-logo-container">
         <a href="admin-dashboard.html">
             <img src="nav-logo.png" class="nav-logo-img">
         </a>
     </div>
-    
+
     <nav class="nav-links">
-        <a href="admin.html">Dashboard</a>
-        <a href="BusManagement.html" class="active">Buses</a>
+              <a href="admin.html">Dashboard</a>
+        <a href="BusManegment.html" class="active">Buses</a>
         <a href="Schedule Management.html">Schedules</a>
-        <a href="UserMangemnt.html">Users</a>
+        <a href="UserMangemnt.html" >Users</a>
     </nav>
 
-    <div class="logout-container">
-        <button class="btn btn-secondary logout-btn">Logout</button>
-    </div>
+    <button class="btn logout-btn">Logout</button>
 </header>
 
-<!-- CONTAINER -->
 <div class="admin-container">
 
 <!-- FORM -->
@@ -39,8 +35,8 @@
 
 <div class="form-group">
 <label>Bus Number</label>
-<input type="text" id="busNumber" required>
-<small style="color:gray;">Bus number cannot be changed after edit</small>
+<input type="number" id="busNumber" required>
+<small style="color:gray;">Bus number cannot be changed after edit</small
 </div>
 
 <div class="form-group">
@@ -50,19 +46,19 @@
 
 <div class="form-group">
 <label>Capacity</label>
-<input type="number" id="capacity" required min="1">
+<input type="number" id="capacity" required>
 </div>
 
 <div class="form-group">
 <label>Status</label>
 <select id="status">
-<option>Active</option>
-<option>Inactive</option>
-<option>Maintenance</option>
+<option value="Active">Active</option>
+<option value="Maintenance">Maintenance</option>
+<option value="Inactive">Inactive</option>
 </select>
 </div>
 
-<button class="btn btn-primary">Save</button>
+<button class="btn btn-primary">Save Bus</button>
 
 </form>
 </div>
@@ -71,7 +67,7 @@
 <div class="card">
 <h2>Bus List</h2>
 
-<table>
+<table class="bus-table">
 <thead>
 <tr>
 <th>Bus</th>
@@ -84,7 +80,6 @@
 
 <tbody id="busTable"></tbody>
 </table>
-
 </div>
 
 </div>
@@ -93,133 +88,123 @@
 
 // ================= DATA =================
 let buses = JSON.parse(localStorage.getItem("buses")) || [];
-let selectedId = null;
+let editId = null;
 
 // ================= SAVE =================
 function save(){
-localStorage.setItem("buses", JSON.stringify(buses));
+    localStorage.setItem("buses", JSON.stringify(buses));
 }
 
 // ================= RENDER =================
-function render(){
-busTable.innerHTML="";
+function renderBuses(){
+    const table = document.getElementById("busTable");
+    table.innerHTML = "";
 
-buses.forEach(b=>{
-busTable.innerHTML += `
-<tr>
-<td>${b.number}</td>
-<td>${b.driver}</td>
-<td>${b.capacity}</td>
-<td>${b.status}</td>
-<td>
-<button class="btn btn-secondary" onclick="editBus(${b.id})">Edit</button>
-<button class="btn btn-danger" onclick="toggleStatus(${b.id})">
-${b.status==="Active"?"Deactivate":"Activate"}
-</button>
-</td>
-</tr>
-`;
-});
+    buses.forEach(bus=>{
+        table.innerHTML += `
+        <tr>
+            <td>${bus.number}</td>
+            <td>${bus.driver}</td>
+            <td>${bus.capacity}</td>
+            <td>${bus.status || "Active"}</td>
+            <td>
+                <button class="btn btn-secondary" onclick="editBus(${bus.id})">Edit</button>
+                <button class="btn btn-danger" onclick="toggleStatus(${bus.id})">
+                    ${bus.status === "Inactive" ? "Activate" : "Deactivate"}
+                </button>
+            </td>
+        </tr>
+        `;
+    });
 }
 
-// ================= ADD / UPDATE =================
-busForm.addEventListener("submit", e=>{
-e.preventDefault();
+// ================= ADD / EDIT =================
+document.getElementById("busForm").addEventListener("submit", function(e){
+    e.preventDefault();
 
-const number = busNumber.value.trim();
-const driver = driverName.value.trim();
-const cap = parseInt(capacity.value);
+    const number = document.getElementById("busNumber").value.trim();
+    const driver = document.getElementById("driverName").value.trim();
+    const capacity = document.getElementById("capacity").value;
+    const status = document.getElementById("status").value;
 
-if(cap <= 0){
-alert("Capacity must be greater than 0");
-return;
-}
+    // numbers only
+    if (!/^\d+$/.test(number)) {
+        alert("Bus number must be numbers only");
+        return;
+    }
 
+    // capacity validation
+    if (capacity <= 0) {
+        alert("Capacity must be greater than 0");
+        return;
+    }
 
-if(!selectedId){
-const exists = buses.some(b => b.number === number);
-if(exists){
-alert("Bus number already exists!");
-return;
-}
-}
+    // ===== EDIT MODE =====
+    if(editId){
+        buses = buses.map(b =>
+            b.id === editId
+            ? { ...b, driver, capacity, status }
+            : b
+        );
+        editId = null;
+    }
 
+    // ===== ADD MODE =====
+    else{
+        // prevent duplicate
+        if (buses.some(b => b.number === number)) {
+            alert("Bus number already exists!");
+            return;
+        }
 
-if(selectedId){
-buses = buses.map(b=>{
-if(b.id === selectedId){
-return {
-...b,
-driver,
-capacity: cap,
-status: status.value
-};
-}
-return b;
-});
+        buses.push({
+            id: Date.now(),
+            number,
+            driver,
+            capacity,
+            status
+        });
+    }
 
-selectedId = null;
-busNumber.disabled = false;
-
-}else{
-
-// ➕ إضافة
-buses.push({
-id: Date.now(),
-number,
-driver,
-capacity: cap,
-status: status.value
-});
-
-}
-
-save();
-render();
-busForm.reset();
+    save();
+    renderBuses();
+    this.reset();
 });
 
 // ================= EDIT =================
 function editBus(id){
-const b = buses.find(x=>x.id===id);
+    const bus = buses.find(b => b.id === id);
 
-busNumber.value = b.number;
-driverName.value = b.driver;
-capacity.value = b.capacity;
-status.value = b.status;
+    document.getElementById("busNumber").value = bus.number;
+    document.getElementById("busNumber").disabled = true; // 🔒 ما يتغير
 
-busNumber.disabled = true;
+    document.getElementById("driverName").value = bus.driver;
+    document.getElementById("capacity").value = bus.capacity;
+    document.getElementById("status").value = bus.status;
 
-selectedId = id;
+    editId = id;
 }
 
-// ================= TOGGLE STATUS =================
+// ================= STATUS =================
 function toggleStatus(id){
-buses = buses.map(b=>{
-if(b.id===id){
-return {
-...b,
-status: b.status==="Active" ? "Inactive" : "Active"
+    buses = buses.map(b =>
+        b.id === id
+        ? { ...b, status: b.status === "Inactive" ? "Active" : "Inactive" }
+        : b
+    );
+
+    save();
+    renderBuses();
+}
+
+// ================= INIT =================
+renderBuses();
+
+// logout
+document.querySelector(".logout-btn").onclick = () => {
+    alert("Logged out");
+    window.location.href = "login.html";
 };
-}
-return b;
-});
-
-save();
-render();
-}
-
-// ================= LOGOUT =================
-document.querySelectorAll('.logout-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        alert("Logged out successfully");
-        window.location.href = "login.html";
-    });
-});
-
-
-// INIT
-render();
 
 </script>
 
