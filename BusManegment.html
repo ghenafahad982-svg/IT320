@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bus Management</title>
+<link rel="stylesheet" href="style (7).css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="nav-logo-container">
+        <a href="admin-dashboard.html">
+            <img src="nav-logo.png" class="nav-logo-img">
+        </a>
+    </div>
+    
+    <nav class="nav-links">
+        <a href="BusManagement.html" class="active">Buses</a>
+        <a href="Schedule Management.html">Schedules</a>
+        <a href="UserMangemnt.html">Users</a>
+    </nav>
+
+    <div class="logout-container">
+        <button class="btn btn-secondary logout-btn">Logout</button>
+    </div>
+</header>
+
+<!-- CONTAINER -->
+<div class="admin-container">
+
+<!-- FORM -->
+<div class="card">
+<h2>🚌 Bus Management</h2>
+
+<form id="busForm">
+
+<div class="form-group">
+<label>Bus Number</label>
+<input type="text" id="busNumber" required>
+<small style="color:gray;">Bus number cannot be changed after edit</small>
+</div>
+
+<div class="form-group">
+<label>Driver Name</label>
+<input type="text" id="driverName" required>
+</div>
+
+<div class="form-group">
+<label>Capacity</label>
+<input type="number" id="capacity" required min="1">
+</div>
+
+<div class="form-group">
+<label>Status</label>
+<select id="status">
+<option>Active</option>
+<option>Inactive</option>
+<option>Maintenance</option>
+</select>
+</div>
+
+<button class="btn btn-primary">Save</button>
+
+</form>
+</div>
+
+<!-- TABLE -->
+<div class="card">
+<h2>Bus List</h2>
+
+<table>
+<thead>
+<tr>
+<th>Bus</th>
+<th>Driver</th>
+<th>Capacity</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="busTable"></tbody>
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+// ================= DATA =================
+let buses = JSON.parse(localStorage.getItem("buses")) || [];
+let selectedId = null;
+
+// ================= SAVE =================
+function save(){
+localStorage.setItem("buses", JSON.stringify(buses));
+}
+
+// ================= RENDER =================
+function render(){
+busTable.innerHTML="";
+
+buses.forEach(b=>{
+busTable.innerHTML += `
+<tr>
+<td>${b.number}</td>
+<td>${b.driver}</td>
+<td>${b.capacity}</td>
+<td>${b.status}</td>
+<td>
+<button class="btn btn-secondary" onclick="editBus(${b.id})">Edit</button>
+<button class="btn btn-danger" onclick="toggleStatus(${b.id})">
+${b.status==="Active"?"Deactivate":"Activate"}
+</button>
+</td>
+</tr>
+`;
+});
+}
+
+// ================= ADD / UPDATE =================
+busForm.addEventListener("submit", e=>{
+e.preventDefault();
+
+const number = busNumber.value.trim();
+const driver = driverName.value.trim();
+const cap = parseInt(capacity.value);
+
+if(cap <= 0){
+alert("Capacity must be greater than 0");
+return;
+}
+
+
+if(!selectedId){
+const exists = buses.some(b => b.number === number);
+if(exists){
+alert("Bus number already exists!");
+return;
+}
+}
+
+
+if(selectedId){
+buses = buses.map(b=>{
+if(b.id === selectedId){
+return {
+...b,
+driver,
+capacity: cap,
+status: status.value
+};
+}
+return b;
+});
+
+selectedId = null;
+busNumber.disabled = false;
+
+}else{
+
+// ➕ إضافة
+buses.push({
+id: Date.now(),
+number,
+driver,
+capacity: cap,
+status: status.value
+});
+
+}
+
+save();
+render();
+busForm.reset();
+});
+
+// ================= EDIT =================
+function editBus(id){
+const b = buses.find(x=>x.id===id);
+
+busNumber.value = b.number;
+driverName.value = b.driver;
+capacity.value = b.capacity;
+status.value = b.status;
+
+busNumber.disabled = true;
+
+selectedId = id;
+}
+
+// ================= TOGGLE STATUS =================
+function toggleStatus(id){
+buses = buses.map(b=>{
+if(b.id===id){
+return {
+...b,
+status: b.status==="Active" ? "Inactive" : "Active"
+};
+}
+return b;
+});
+
+save();
+render();
+}
+
+// ================= LOGOUT =================
+document.querySelectorAll('.logout-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        alert("Logged out successfully");
+        window.location.href = "login.html";
+    });
+});
+
+
+// INIT
+render();
+
+</script>
+
+</body>
+</html>
