@@ -1261,3 +1261,10 @@ td {
   #busTable td:nth-child(3)::before { content: "Capacity"; }
   #busTable td:nth-child(4)::before { content: "Status"; }
 }
+/* للـ Reservations */
+@media (max-width: 768px) {
+  #scheduleTable td:nth-child(1)::before { content: "Route"; }
+ #scheduleTable td:nth-child(2)::before { content: "Bus"; }
+  #scheduleTable td:nth-child(3)::before { content: "Type"; }
+  #scheduleTable td:nth-child(4)::before { content: "Days"; }
+  #scheduleTable td:nth-child(5)::before { content: "ArrivalTimes"; }
