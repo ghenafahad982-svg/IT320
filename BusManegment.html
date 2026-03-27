@@ -22,7 +22,9 @@
         <a href="UserMangemnt.html" >Users</a>
     </nav>
 
-    <button class="btn logout-btn">Logout</button>
+  <div class="logout-container">
+        <button class="btn btn-secondary logout-btn">Logout</button>
+    </div>
 </header>
 
 <div class="admin-container">
@@ -200,11 +202,13 @@ function toggleStatus(id){
 // ================= INIT =================
 renderBuses();
 
-// logout
-document.querySelector(".logout-btn").onclick = () => {
-    alert("Logged out");
-    window.location.href = "login.html";
-};
+// ================= LOGOUT =================
+document.querySelectorAll('.logout-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        alert("Logged out successfully");
+        window.location.href = "login.html";
+    });
+});
 
 </script>
 
