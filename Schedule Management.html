@@ -248,6 +248,7 @@ type: type.value,
 date: date.value,
 days: [...selectedDays],
 times: times
+
 });
 
 save();
@@ -259,7 +260,7 @@ timesContainer.innerHTML = `<input type="time" class="timeInput">`;
 selectedDays = [];
 document.querySelectorAll(".days button").forEach(btn=>btn.classList.remove("active"));
 daysContainer.classList.remove("disabled");
-
+showRSToast("Schedule created successfully");
 });
 
 // ===== RENDER =====
@@ -290,7 +291,7 @@ if(confirmDelete){
 schedules = schedules.filter(s=>s.id!==id);
 save();
 render();
-alert("Deleted successfully ✅");
+showRSToast("Schedule deleted successfully");
 }
 
 }
@@ -306,8 +307,21 @@ window.location.href="login.html";
 // INIT
 loadBuses();
 render();
+function showRSToast(message) {
+    const toast = document.getElementById("rs-toast");
+    const text = document.getElementById("rs-toast-text");
 
+    text.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
 </script>
-
+<div class="rs-toast" id="rs-toast">
+  <span class="rs-toast-icon">✓</span>
+  <span id="rs-toast-text">Done</span>
+</div>
 </body>
 </html>
