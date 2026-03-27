@@ -1133,3 +1133,131 @@ input[type="tel"]:focus {
         align-items: flex-start;
     }
 }
+
+
+/* ================= ADMIN FIX ================= */
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Card */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    overflow-x: auto;
+}
+
+th {
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Status */
+.status-active {
+    color: green;
+    font-weight: bold;
+}
+
+.status-inactive {
+    color: red;
+    font-weight: bold;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .container {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 15px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        border: none;
+    }
+
+    td::before {
+        font-weight: bold;
+        color: var(--primary-blue);
+    }
+/* للـ Users */
+@media (max-width: 768px) {
+  #userTable td:nth-child(1)::before { content: "Name"; }
+  #userTable td:nth-child(2)::before { content: "Email"; }
+  #userTable td:nth-child(3)::before { content: "Phone"; }
+  #userTable td:nth-child(4)::before { content: "Role"; }
+  #userTable td:nth-child(5)::before { content: "Status"; }
+  
+}
+
+/* للـ Buses */
+@media (max-width: 768px) {
+  #busTable td:nth-child(1)::before { content: "Bus Number"; }
+  #busTable td:nth-child(2)::before { content: "Driver Name"; }
+  #busTable td:nth-child(3)::before { content: "Capacity"; }
+  #busTable td:nth-child(4)::before { content: "Role"; }
+}
