@@ -1259,5 +1259,5 @@ td {
   #busTable td:nth-child(1)::before { content: "Bus Number"; }
   #busTable td:nth-child(2)::before { content: "Driver Name"; }
   #busTable td:nth-child(3)::before { content: "Capacity"; }
-  #busTable td:nth-child(4)::before { content: "Role"; }
+  #busTable td:nth-child(4)::before { content: "Status"; }
 }
