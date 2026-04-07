@@ -75,7 +75,7 @@ document.getElementById('admin-login-form').addEventListener('submit', function(
             loginBtn.style.color = "#ffffff";
            
             setTimeout(() => {
-           window.location.href = "admin-dashboard.html";
+           window.location.href = "admin.html";
         }, 1500);
           
         }
