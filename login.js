@@ -59,11 +59,11 @@ document.getElementById('admin-login-form').addEventListener('submit', function(
     setTimeout(() => {
         // AC: Unregistered email
         if (!adminDB.hasOwnProperty(email)) {
-            showAdminError("Login failed: Unregistered email address.\nHint for the doctor: use this email ( admin@ksu.edu.sa ) and password ( Admin123 )");    
+            showAdminError("Login failed: Unregistered email address.\nhint for Supervisor : use this email ( admin@ksu.edu.sa ) and password ( Admin123 )");    
         } 
         // AC: Incorrect password
         else if (adminDB[email] !== password) {
-           showAdminError("Login failed: Unregistered email address.\nHint for the doctor: use this email ( admin@ksu.edu.sa ) and password ( Admin123 )");
+           showAdminError("Login failed: Unregistered email address.\nhint for Supervisor : use this email ( admin@ksu.edu.sa ) and password ( Admin123 )");
         } 
       
        // AC: Successful login
