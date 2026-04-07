@@ -79,7 +79,7 @@ document.getElementById('admin-login-form').addEventListener('submit', function(
         }, 1500);
           
         }
-    }, 5000);
+    }, 3000);
 
       
     // Helper for Admin Errors
